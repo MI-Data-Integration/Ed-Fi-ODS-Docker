@@ -32,7 +32,7 @@ try {
     docker build -t "${imageName}:$imageVersion" -t $imageName --platform linux .
 
     $existingImageNames = $existingImageNames | Where-Object{$_ -ne " "}
-    $existingImageNames += $imageName
+    $existingImageNames += "$imageName|n${imageName}:$imageVersion"
 
     $newImageNames = [string]::Join('|n',$existingImageNames)
 
