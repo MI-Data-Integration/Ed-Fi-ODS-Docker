@@ -13,4 +13,6 @@ fi
 
 envsubst < /app/appsettings.template.json > /app/appsettings.json
 
+if [ "$DEBUG" == "true" ]; then cat ./appsettings.json; fi
+
 dotnet EdFi.Ods.WebApi.dll
