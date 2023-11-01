@@ -27,9 +27,9 @@ try {
 
     $imageVersion = $packageVersion.Split('+')[0]
 
-    $imageName = "$registry${dockerImageName}:$imageVersion"
+    $imageName = "$registry$dockerImageName"
 
-    docker build -t $imageName --platform linux .
+    docker build -t "${imageName}:$imageVersion" -t $imageName --platform linux .
 
     $existingImageNames = $existingImageNames | Where-Object{$_ -ne " "}
     $existingImageNames += $imageName
