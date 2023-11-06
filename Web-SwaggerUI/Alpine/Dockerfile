@@ -22,8 +22,9 @@ WORKDIR /app
 COPY appsettings.template.json /app/appsettings.template.json
 COPY run.sh /app/run.sh
 
+COPY app.zip /app/SwaggerUI.zip
+
 RUN apk --no-cache add unzip=~6 dos2unix=~7 bash=~5 gettext=~0 icu=~72 curl=~8 && \
-    wget -O /app/SwaggerUI.zip https://pkgs.dev.azure.com/ed-fi-alliance/Ed-Fi-Alliance-OSS/_apis/packaging/feeds/EdFi/nuget/packages/EdFi.Suite3.Ods.SwaggerUI/versions/${VERSION}/content && \
     unzip /app/SwaggerUI.zip -d /app && \
     rm -f /app/SwaggerUI.zip && \
     dos2unix /app/*.json && \
