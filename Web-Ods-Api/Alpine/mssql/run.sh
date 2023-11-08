@@ -12,5 +12,11 @@ if [[ "$TPDM_ENABLED" != true ]]; then
 fi
 
 envsubst < /app/appsettings.template.json > /app/appsettings.json
+envsubst < /app/log4net.template.config > /app/log4net.config
+
+if [ "$DEBUG" == "true" ]; then
+    cat ./appsettings.json;
+    cat ./log4net.config;
+fi
 
 dotnet EdFi.Ods.WebApi.dll
