@@ -8,9 +8,8 @@ param(
     [Parameter(ValueFromRemainingArguments)]
     [string[]]$existingImageNames = @()
 )
-
+$ErrorActionPreference = 'Stop'
 try {
-
     $dockerImageName = ($packageId -creplace '\B([A-Z])','-$1' `
         -replace 'EdFi\.Ods','ods-api' `
         -replace '\.','-'`
@@ -19,13 +18,15 @@ try {
         ).ToLower()
 
     Write-Verbose $dockerImageName
-    $packageSource = Join-Path -Path $packageFolder -ChildPath "$packageId.$packageVersion.nupkg"
+    $packageSource = Join-Path -Path $packageFolder -ChildPath "$packageId.$($packageVersion.Split('+')[0]).nupkg"
 
     Copy-Item -Path $packageSource -Destination "$dockerProject\app.zip"
+    #rename package to zip so it does not get pushed to OctopusDeploy
+    Rename-Item -LiteralPath $packageSource -NewName "$(Split-Path -Path $packageSource -LeafBase).zip"
 
     Push-Location -Path $dockerProject
 
-    $imageVersion = $packageVersion.Split('+')[0]
+    $imageVersion = $packageVersion.Replace('+','_')
 
     $imageName = "$registry$dockerImageName"
 
@@ -38,8 +39,7 @@ try {
 
     Write-Output "##teamcity[setParameter name='imageName' value='$newImageNames']"
 } Catch {
-    $ErrorMessage = $_.Exception.Message
-    Write-Output $ErrorMessage
+    Write-Error $_
     exit(1)
 } Finally {
     Pop-Location
