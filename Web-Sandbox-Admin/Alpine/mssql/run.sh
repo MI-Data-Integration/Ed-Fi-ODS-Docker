@@ -18,4 +18,8 @@ envsubst < /app/appsettings.template.json > /app/appsettings.json
 # >&2 echo "Postgres is up - executing command"
 # exec $cmd
 
+if [ "$DEBUG" == "true" ]; then
+    cat ./appsettings.json;
+fi
+
 dotnet EdFi.Ods.Sandbox.Admin.dll
