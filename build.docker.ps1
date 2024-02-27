@@ -15,6 +15,7 @@ try {
         -replace '\.','-'`
         -replace 'M-I6', 'MI6'`
         -replace 'U-I', 'ui'`
+        -replace 'M-I-D-X', 'MIDX'`
         ).ToLower()
 
     Write-Verbose $dockerImageName
