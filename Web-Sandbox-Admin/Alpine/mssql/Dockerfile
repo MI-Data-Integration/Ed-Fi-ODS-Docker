@@ -4,7 +4,7 @@
 # See the LICENSE and NOTICES files in the project root for more information.
 
 # Tag aspnet:6.0-alpine
-FROM mcr.microsoft.com/dotnet/aspnet@sha256:201cedd60cb295b2ebea7184561a45c5c0ee337e37300ea0f25cff5a2c762538
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine
 LABEL maintainer="Ed-Fi Alliance, LLC and Contributors <techsupport@ed-fi.org>"
 
 ENV VERSION="6.1.901"
@@ -25,7 +25,7 @@ COPY log4net.config /app/log4net.txt
 
 COPY app.zip /app/SandboxAdmin.zip
 
-RUN apk --no-cache add unzip=~6 dos2unix=~7 bash=~5 gettext=~0 icu=~72 curl=~8 && \
+RUN apk --no-cache add unzip=~6 dos2unix=~7 bash=~5 gettext=~0 icu curl=~8 && \
     unzip /app/SandboxAdmin.zip -d /app && \
     rm -f /app/SandboxAdmin.zip && \
     rm -f /app/appsettings.json && \
