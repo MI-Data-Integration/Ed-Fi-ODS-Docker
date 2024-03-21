@@ -10,13 +10,15 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 try {
-    $dockerImageName = ($packageId -creplace '\B([A-Z])','-$1' `
+<#     $dockerImageName = ($packageId -creplace '\B([A-Z])','-$1' `
         -replace 'EdFi\.Ods','ods-api' `
         -replace '\.','-'`
         -replace 'M-I6', 'MI6'`
         -replace 'U-I', 'ui'`
         -replace 'M-I-D-X', 'MIDX'`
         ).ToLower()
+ #>
+    $dockerImageName = $packageId.ToLower() -replace '\.','-'
 
     Write-Verbose $dockerImageName
     $packageSource = Join-Path -Path $packageFolder -ChildPath "$packageId.$($packageVersion.Split('+')[0]).nupkg"
