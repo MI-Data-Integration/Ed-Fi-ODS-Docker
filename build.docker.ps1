@@ -1,8 +1,8 @@
 [CmdLetBinding()]
 param(
     [string]$packageFolder = ".\Ed-Fi-ODS-Implementation\packages",
-    [string]$dockerProject =  ".\Ed-Fi-ODS-Docker\Web-Sandbox-Admin\Alpine\mssql",
-    [string]$packageId = "EdFi.Ods.SandboxAdmin",
+    [string]$dockerProject =  ".\Ed-Fi-ODS-Docker\Web-Ods-Api\Alpine\mssql",
+    [string]$packageId = "MIDH.Api.MI6",
     [string]$packageVersion = "0.0.0",
     [string]$registry = "",
     [Parameter(ValueFromRemainingArguments)]
