@@ -24,9 +24,10 @@ try {
     $packageSource = Join-Path -Path $packageFolder -ChildPath "$packageId.$($packageVersion.Split('+')[0]).nupkg"
 
     Copy-Item -Path $packageSource -Destination "$dockerProject\app.zip"
-    #rename package to zip so it does not get pushed to OctopusDeploy
-    Rename-Item -LiteralPath $packageSource -NewName "$(Split-Path -Path $packageSource -LeafBase).zip"
-
+    if ($packageId -ne "MIDH.Api.MI6") {
+        #rename package to zip so it does not get pushed to OctopusDeploy
+        Rename-Item -LiteralPath $packageSource -NewName "$(Split-Path -Path $packageSource -LeafBase).zip"
+    }
     Push-Location -Path $dockerProject
 
     $imageVersion = $packageVersion.Replace('+','_')
