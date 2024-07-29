@@ -11,8 +11,12 @@ if [[ "$TPDM_ENABLED" != true ]]; then
     export Plugin__Folder="./Plugin_Disabled"
 fi
 
+if [ -z "$LOG4NET_SCHEMA" ]; then
+    LOG4NET_SCHEMA="api"
+fi
+
 envsubst < /app/appsettings.template.json > /app/appsettings.json
-envsubst < /app/log4net.template.config > /app/log4net.config
+envsubst < /app/log4net.template.$LOG4NET_SCHEMA.config > /app/log4net.config
 
 if [ "$DEBUG" == "true" ]; then
     cat ./appsettings.json;
