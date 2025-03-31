@@ -7,6 +7,4 @@
 set -e
 set +x
 
-envsubst < /app/appsettings.template.json > /app/appsettings.json
-
 dotnet EdFi.Ods.SwaggerUI.dll

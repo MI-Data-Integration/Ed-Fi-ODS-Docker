@@ -24,7 +24,6 @@ ENV PathBase="${DOCS_VIRTUAL_NAME}"
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 
 WORKDIR /app
-COPY --chmod=600 appsettings.template.json /app/appsettings.template.json
 COPY --chmod=500 run.sh /app/run.sh
 
 COPY app.zip /app/SwaggerUI.zip

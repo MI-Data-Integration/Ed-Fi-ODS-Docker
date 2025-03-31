@@ -19,9 +19,7 @@ ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 ENV VERSION="6.2.2329"
 
 WORKDIR /app
-COPY --chmod=600 appsettings.template.json /app/appsettings.template.json
 COPY --chmod=500 run.sh /app/run.sh
-COPY log4net.template.*.config /app
 
 COPY app.zip /app/WebApi.zip
 
@@ -29,12 +27,13 @@ RUN umask 0077 && \
     unzip /app/WebApi.zip -d /app && \
     rm -f /app/WebApi.zip && \
     dos2unix /app/*.json && \
+    dos2unix /app/*.config && \
     dos2unix /app/*.sh && \
-    dos2unix /app/log4net.template.*.config && \
     rm -f /app/*.exe && \
     apk del unzip dos2unix curl && \
     chown -R edfi /app
 
 EXPOSE 8080
 USER edfi
+VOLUME /app/logs
 ENTRYPOINT [ "/app/run.sh" ]
