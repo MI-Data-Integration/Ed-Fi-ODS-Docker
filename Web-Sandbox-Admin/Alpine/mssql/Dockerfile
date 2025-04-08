@@ -24,16 +24,13 @@ ENV OAuthUrl="https://localhost/${ODS_VIRTUAL_NAME}/oauth/"
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 
 WORKDIR /app
-# COPY --chmod=600 appsettings.template.json /app/appsettings.template.json
 COPY --chmod=500 run.sh /app/run.sh
-COPY log4net.config /app/log4net.txt
 
 COPY app.zip /app/SandboxAdmin.zip
 
 RUN umask 0077 && \
     unzip /app/SandboxAdmin.zip -d /app && \
     rm -f /app/SandboxAdmin.zip && \
-    rm -f /app/appsettings.json && \
     dos2unix /app/*.json && \
     dos2unix /app/*.sh && \
     dos2unix /app/*.config && \
