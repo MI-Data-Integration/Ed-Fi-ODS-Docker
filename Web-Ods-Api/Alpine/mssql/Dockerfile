@@ -36,5 +36,4 @@ RUN umask 0077 && \
 EXPOSE 8080
 USER edfi
 VOLUME /app/logs
-VOLUME /tmp/
 ENTRYPOINT [ "/app/run.sh" ]
