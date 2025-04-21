@@ -33,15 +33,15 @@ RUN umask 0077 && \
     apk del unzip dos2unix curl && \
     chown -R edfi /app
 
-RUN mkdir -p /app/tmp && \
-    chown edfi:edfi /app/tmp
+RUN mkdir -p /app/tmp && chown edfi:edfi /app/tmp
 
-RUN mkdir -p /app/logs && \
-    chown edfi:edfi /app/logs
+RUN mkdir -p /app/logs && chown edfi:edfi /app/logs
 
 EXPOSE 8080
-USER edfi
 ENV TMPDIR=/app/tmp
+USER edfi
+RUN touch /app/tmp/testfile
+RUN touch /app/logs/testfile
 VOLUME /app/tmp
 VOLUME /app/logs
 ENTRYPOINT [ "/app/run.sh" ]
