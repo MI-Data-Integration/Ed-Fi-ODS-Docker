@@ -34,10 +34,10 @@ RUN umask 0077 && \
     chown -R edfi /app
 
 RUN mkdir -p /app/tmp && \
-    chown -R edfi /app/tmp
+    chown edfi:edfi /app/tmp
 
 RUN mkdir -p /app/logs && \
-    chown -R edfi /app/logs
+    chown edfi:edfi /app/logs
 
 EXPOSE 8080
 USER edfi
