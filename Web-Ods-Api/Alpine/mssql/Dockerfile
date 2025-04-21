@@ -40,8 +40,6 @@ RUN mkdir -p /app/logs && chown edfi:edfi /app/logs
 EXPOSE 8080
 ENV TMPDIR=/app/tmp
 USER edfi
-RUN touch /app/tmp/testfile
-RUN touch /app/logs/testfile
 VOLUME /app/tmp
 VOLUME /app/logs
 ENTRYPOINT [ "/app/run.sh" ]
