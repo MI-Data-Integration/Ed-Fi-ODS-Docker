@@ -4,7 +4,7 @@
 # See the LICENSE and NOTICES files in the project root for more information.
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS base
-RUN apk --no-cache add unzip=~6 dos2unix=~7 bash=~5 gettext=~0 icu=~74 curl=~8 && \
+RUN apk --no-cache add unzip=~6 dos2unix=~7 bash=~5 gettext=~0 icu curl=~8 && \
     addgroup -S edfi && adduser -S edfi -G edfi
 
 # Start a new layer so that the above layer can be cached
